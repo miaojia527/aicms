@@ -13,6 +13,4 @@ class Home(control):
 
 	async def list(self):
 
-		return {
-			'num': 10,
-		}
+		return 10
