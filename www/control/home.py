@@ -4,6 +4,8 @@
 __author__ = 'HaoJie Li'
 
 from lib.control import control
+from lib.models import User, Comment, Blog, next_id
+from lib.apis import Page, APIValueError, APIResourceNotFoundError
 
 class Home(control):
 	"""docstring for Home"""
@@ -12,5 +14,13 @@ class Home(control):
 		self.arg = arg
 
 	async def list(self):
-
-		return 10
+		num = await Blog.findNumber('count(id)')
+		page = Page(num)
+		if num == 0:
+			blogs = []
+		else:
+			blogs = await Blog.findAll(orderBy='created_at desc', limit=(page.offset, page.limit))
+		return {
+			"page":page,
+			"blogs":blogs
+		}

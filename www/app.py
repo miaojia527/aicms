@@ -20,7 +20,7 @@ from aiohttp import web
 from lib.coroweb import add_routes, add_static
 
 from jinja2 import Environment, FileSystemLoader
-
+import lib.orm as orm
 from conf.config import configs
 
 def init_jinja2(app, **kw):
@@ -103,7 +103,7 @@ async def response_factory(app, handler):
     return response
 
 async def init(loop):
-    #await orm.create_pool(loop=loop, host='127.0.0.1', port=3306, user='www', password='www', db='awesome')
+    await orm.create_pool(loop=loop, host='localhost', port=3306, user='root', password='1', db='awesome')
     app = web.Application(loop=loop, middlewares=[
         logger_factory, response_factory
     ])

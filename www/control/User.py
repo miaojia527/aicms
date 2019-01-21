@@ -3,6 +3,7 @@
 
 from lib.control import control
 from service.user import user
+from lib.models import User, Comment, Blog, next_id
     
 class User(control):
 
@@ -11,7 +12,5 @@ class User(control):
 		self.name = name
 		
 	def do(self):
-		print('user do')
-		_user = user()
-		_user.do()
 		
+		print('user do')

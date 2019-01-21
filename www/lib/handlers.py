@@ -28,15 +28,10 @@ async def index(*, page='1'):
 	home = Home()
 
 	page_index = get_page_index(page)
-	num  = await home.list()
-	page = Page(num)
+	result  = await home.list()
 
 	return {
         '__template__': 'index.html',
-        'page': page,
-        'blogs': [{
-            'name': '测试',
-            'summary': '这是一条测试',
-            'created_at': time.time()
-        }],
+        'page': result['page'],
+        'blogs':result['blogs'],
     }
